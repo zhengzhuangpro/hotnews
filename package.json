@@ -1,0 +1,37 @@
+{
+  "name": "hotnews",
+  "version": "0.1.0",
+  "description": "命令行热门新闻聚合工具，支持百度、微博、抖音、虎扑热搜",
+  "keywords": ["cli", "news", "hotnews", "baidu", "weibo", "douyin", "hupu", "trending"],
+  "author": "zhengzhuang <zhengzhuangpro@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhengzhuangpro/hotnews.git"
+  },
+  "type": "module",
+  "bin": {
+    "hotnews": "./dist/src/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "bun run --watch src/cli.tsx",
+    "start": "bun run src/cli.tsx",
+    "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\""
+  },
+  "dependencies": {
+    "ink": "^7.0.1",
+    "meow": "^14.1.0",
+    "react": "^19.1.0",
+    "react-devtools-core": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}
