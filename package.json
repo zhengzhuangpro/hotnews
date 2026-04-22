@@ -22,7 +22,8 @@
   "scripts": {
     "dev": "bun run --watch src/cli.tsx",
     "start": "bun run src/cli.tsx",
-    "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\""
+    "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\"",
+    "release": "bun scripts/release.ts"
   },
   "dependencies": {
     "ink": "^7.0.1",
