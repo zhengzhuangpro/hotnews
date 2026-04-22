@@ -8,8 +8,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "rootDir": "src",
     "types": [
+      "bun",
       "node"
     ],
     "paths": {
@@ -20,5 +20,6 @@
   },
   "include": [
     "src/**/*.ts",
+    "scripts/**/*.ts",
   ]
 }
