@@ -1,6 +1,6 @@
 {
   "name": "hotnews",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "命令行热门新闻聚合工具，支持百度、微博、抖音、虎扑热搜",
   "keywords": ["cli", "news", "hotnews", "baidu", "weibo", "douyin", "hupu", "trending"],
   "author": "zhengzhuang <zhengzhuangpro@gmail.com>",
