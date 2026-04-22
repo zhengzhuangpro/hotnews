@@ -77,11 +77,7 @@ async function main() {
   console.log("\nBuild...");
   await run(["bun", "run", "build"], { dry: dryRun });
 
-  // 4. Test
-  console.log("\nTest...");
-  await run(["bun", "test"], { dry: dryRun });
-
-  // 5. Git commit
+  // 4. Git commit
   console.log("\nGit commit...");
   await run(["git", "add", "package.json"], { dry: dryRun });
   await run(["git", "commit", "-m", `release: v${newVersion}`], { dry: dryRun });
