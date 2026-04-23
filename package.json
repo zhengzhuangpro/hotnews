@@ -35,7 +35,7 @@
     "check": "bun scripts/check.ts",
     "release": "bun scripts/release.ts patch",
     "publish": "npm publish",
-    "gh-release": "gh release create v$(node -p \"require('./package.json').version\") --generate-notes"
+    "gh-release": "git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes"
   },
   "dependencies": {
     "ink": "^7.0.1",
