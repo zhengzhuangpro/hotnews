@@ -33,7 +33,9 @@
     "start": "bun run src/cli.tsx",
     "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\"",
     "check": "bun scripts/check.ts",
-    "release": "bun scripts/release.ts patch"
+    "release": "bun scripts/release.ts patch",
+    "publish": "npm publish",
+    "gh-release": "gh release create v$(node -p \"require('./package.json').version\") --generate-notes"
   },
   "dependencies": {
     "ink": "^7.0.1",
