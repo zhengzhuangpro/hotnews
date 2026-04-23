@@ -1,15 +1,18 @@
 ---
 name: hotnews
 description: |
-  CLI tool to fetch trending news and hot topics from 8 sources across Chinese platforms and GitHub. Returns structured news items with titles, URLs, and hot metrics.
+  CLI tool to fetch trending news and hot topics from 8 sources across Chinese platforms and GitHub. Returns structured news items with titles, URLs, and metadata.
 
   USE FOR:
-  - Fetching trending/hot news from Chinese social media and tech platforms
-  - Monitoring hot topics on Baidu, Weibo, Douyin, Zhihu, Hupu, 36Kr, Juejin, GitHub
+  - Fetching trending/hot news from Chinese and international platforms
+  - Monitoring hot topics across social media, tech, finance, and news sites
   - Getting structured news data as JSON for further processing
   - Listing available news sources
 
   Requires npm install.
+allowed-tools:
+  - Bash(hotnews *)
+  - Bash(npx hotnews *)
 ---
 
 # hotnews CLI
