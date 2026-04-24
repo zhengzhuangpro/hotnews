@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/hotnews.svg)](https://www.npmjs.com/package/hotnews)
 [![npm downloads](https://img.shields.io/npm/dm/hotnews.svg)](https://www.npmjs.com/package/hotnews)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![clawhub](https://img.shields.io/badge/clawhub-view-blue)](https://clawhub.ai/zhengzhuangpro/hotnews)
 
 一个基于 React Ink + TypeScript + Bun 构建的命令行热门新闻聚合工具。
 
