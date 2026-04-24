@@ -1,64 +1,66 @@
 # hotnews
 
-[![npm version](https://img.shields.io/npm/v/hotnews.svg)](https://www.npmjs.com/package/hotnews)
-[![npm downloads](https://img.shields.io/npm/dm/hotnews.svg)](https://www.npmjs.com/package/hotnews)
+[![npm version](https://img.shields.io/npm/v/hotnews.svg)](https://www.npmjs.org/package/hotnews)
+[![npm downloads](https://img.shields.io/npm/dm/hotnews.svg)](https://www.npmjs.org/package/hotnews)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-一个基于 React Ink + TypeScript + Bun 构建的命令行热门新闻聚合工具。
+English | [中文](README_zh.md)
 
-## 安装
+A command-line trending news aggregator built with React Ink + TypeScript + Bun.
+
+## Installation
 
 ```bash
 npm install -g hotnews
 ```
 
-安装后即可在任意位置使用 `hotnews` 命令，只需 Node.js 环境。
+After installation, run `hotnews` from anywhere — only Node.js is required.
 
-## 使用
+## Usage
 
-### 查看帮助
+### Show help
 
 ```bash
 hotnews --help
 ```
 
-### 查看所有可用源
+### List all available sources
 
 ```bash
 hotnews list
 ```
 
-### 获取热门新闻
+### Fetch trending news
 
 ```bash
-hotnews baidu      # 百度热搜
-hotnews weibo      # 微博热搜
-hotnews douyin     # 抖音热搜
-hotnews hupu       # 虎扑热帖
+hotnews baidu      # Baidu Hot Search
+hotnews weibo      # Weibo Hot Search
+hotnews douyin     # Douyin Hot Search
+hotnews hupu       # Hupu Hot Topics
 ```
 
-### JSON 格式输出
+### JSON output
 
 ```bash
 hotnews baidu --json
 hotnews weibo --json
 ```
 
-## 新闻源
+## News Sources
 
-| 源 | ID | 说明 |
+| Source | ID | Description |
 |---|---|---|
-| 百度热搜 | `baidu` | 百度实时热搜榜 |
-| 微博热搜 | `weibo` | 微博实时热搜榜 |
-| 抖音热搜 | `douyin` | 抖音实时热搜榜 |
-| 虎扑热搜 | `hupu` | 虎扑步行街热帖 |
+| Baidu Hot Search | `baidu` | Baidu real-time trending topics |
+| Weibo Hot Search | `weibo` | Weibo real-time trending topics |
+| Douyin Hot Search | `douyin` | Douyin real-time trending topics |
+| Hupu Hot Topics | `hupu` | Hupu popular forum posts |
 
-## 技术栈
+## Tech Stack
 
-- [Bun](https://bun.sh/) — 开发构建
-- [React Ink](https://github.com/vadimdemedes/ink) — 终端 UI 渲染
-- [TypeScript](https://www.typescriptlang.org/) — 类型安全
-- [meow](https://github.com/sindresorhus/meow) — CLI 参数解析
+- [Bun](https://bun.sh/) — Build tooling
+- [React Ink](https://github.com/vadimdemedes/ink) — Terminal UI rendering
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [meow](https://github.com/sindresorhus/meow) — CLI argument parsing
 
 ## License
 
