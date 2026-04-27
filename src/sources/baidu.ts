@@ -5,15 +5,13 @@ const UA =
 
 async function fetchBaidu(): Promise<NewsItem[]> {
   const res = await fetch(
-    "https://top.baidu.com/api/board?platform=wise&tab=realtime",
+    // "https://top.baidu.com/api/board?platform=wise&tab=realtime",
+    "https://top.baidu.com/api/board?tab=realtime",
     { headers: { "User-Agent": UA } }
   );
   const json = (await res.json()) as any;
-
   const cards = json?.data?.cards ?? [];
-  const content = cards.flatMap((c: any) =>
-    (c.content ?? []).flatMap((co: any) => co.content ?? [])
-  );
+  const content = cards.find((item: { component: string; }) => item.component === "hotList")?.content;
 
   return content
     .filter((item: any) => item.word)
