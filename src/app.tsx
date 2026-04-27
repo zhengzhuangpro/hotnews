@@ -76,7 +76,7 @@ function NewsList({ source, items }: { source: NewsSource; items: NewsItem[] }) 
   );
 }
 
-function Fetcher({ sourceId }: { sourceId: string }) {
+function Fetcher({ sourceId, limit }: { sourceId: string; limit: number }) {
   const { exit } = useApp();
   const [items, setItems] = useState<NewsItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -93,7 +93,7 @@ function Fetcher({ sourceId }: { sourceId: string }) {
     source
       .fetch()
       .then((data) => {
-        setItems(data);
+        setItems(data.slice(0, limit));
         setTimeout(() => exit(), 100);
       })
       .catch((err) => {
@@ -113,7 +113,7 @@ export function App({
   flags,
 }: {
   command: string | undefined;
-  flags: { json?: boolean };
+  flags: { json?: boolean; limit?: number };
 }) {
   const { exit } = useApp();
 
@@ -139,12 +139,12 @@ export function App({
     );
   }
 
-  return <Fetcher sourceId={command} />;
+  return <Fetcher sourceId={command} limit={Math.min(Math.max(1, flags.limit ?? 10), 50)} />;
 }
 
 export async function runApp(
   command: string | undefined,
-  flags: { json?: boolean }
+  flags: { json?: boolean; limit?: number }
 ) {
   if (flags.json && command && command !== "list") {
     const source = getSource(command);
@@ -153,7 +153,8 @@ export async function runApp(
       process.exit(1);
     }
     try {
-      const items = await source.fetch();
+      const limit = Math.min(Math.max(1, flags.limit ?? 10), 50);
+      const items = (await source.fetch()).slice(0, limit);
       console.log(JSON.stringify(items, null, 2));
     } catch (err: any) {
       console.error(`获取失败: ${err.message}`);

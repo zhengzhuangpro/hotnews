@@ -38,13 +38,25 @@ hotnews baidu      # 百度热搜
 hotnews weibo      # 微博热搜
 hotnews douyin     # 抖音热搜
 hotnews hupu       # 虎扑热帖
+hotnews zhihu      # 知乎热榜
+hotnews juejin     # 掘金热榜
+hotnews kr36       # 36氪热榜
+hotnews github     # GitHub Trending
+```
+
+### 控制显示条数
+
+```bash
+hotnews baidu --limit 5       # 显示前 5 条
+hotnews weibo -l 15            # 短参数
+hotnews douyin --limit 100     # 超过最大值自动截断为 50 条
 ```
 
 ### JSON 格式输出
 
 ```bash
 hotnews baidu --json
-hotnews weibo --json
+hotnews weibo --json --limit 5
 ```
 
 ## 新闻源
@@ -55,6 +67,10 @@ hotnews weibo --json
 | 微博热搜 | `weibo` | 微博实时热搜榜 |
 | 抖音热搜 | `douyin` | 抖音实时热搜榜 |
 | 虎扑热搜 | `hupu` | 虎扑步行街热帖 |
+| 知乎热榜 | `zhihu` | 知乎热门问题 |
+| 掘金热榜 | `juejin` | 掘金开发者热门文章 |
+| 36氪热榜 | `kr36` | 36氪科技热门资讯 |
+| GitHub Trending | `github` | GitHub 热门仓库 |
 
 ## 技术栈
 
