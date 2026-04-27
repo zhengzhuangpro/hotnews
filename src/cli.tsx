@@ -18,14 +18,15 @@ ${sourceList}
 
   Options
     --json     以 JSON 格式输出
+    --limit    指定显示条数 (默认: 10, 最大: 50)
     --help     显示帮助信息
 
   Examples
     $ hotnews list
     $ hotnews baidu
     $ hotnews weibo --json
-    $ hotnews douyin
-    $ hotnews hupu
+    $ hotnews weibo --limit 5
+    $ hotnews douyin -l 15
 `,
   {
     importMeta: import.meta,
@@ -34,6 +35,11 @@ ${sourceList}
       json: {
         type: "boolean",
         default: false,
+      },
+      limit: {
+        type: "number",
+        shortFlag: "l",
+        default: 10,
       },
     },
   }
