@@ -34,6 +34,7 @@ Follow this pattern:
 | See all sources | `hotnews list` | Don't know source names |
 | Get news | `hotnews <source>` | Know the source, want readable output |
 | Get news as JSON | `hotnews <source> --json` | Need structured data for processing |
+| Control item count | `hotnews <source> --limit N` | Want specific number of results (1-50, default 10) |
 
 ## Commands
 
@@ -50,7 +51,16 @@ hotnews list
 ```bash
 hotnews baidu
 hotnews baidu --json
+hotnews weibo --limit 5
+hotnews douyin -l 15 --json
 ```
+
+### Options
+
+| Flag | Short | Description |
+|---|---|---|
+| `--json` | | Output as JSON |
+| `--limit N` | `-l N` | Number of items to return (default: 10, max: 50) |
 
 Output fields (JSON mode):
 - `title` - News headline
@@ -86,7 +96,7 @@ Output fields (JSON mode):
 
 ```bash
 hotnews baidu --json | jq '.[].title'
-hotnews baidu --json | jq '.[:5]'
+hotnews baidu --json --limit 5
 hotnews weibo --json | jq '.[] | "\(.rank). \(.title) \(.hot // "")"'
 hotnews github --json | jq '.[] | "\(.title) - \(.hot)"'
 ```
