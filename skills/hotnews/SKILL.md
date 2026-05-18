@@ -10,6 +10,7 @@ description: |
   - Listing available news sources
 
   Requires npm install.
+license: MIT
 allowed-tools:
   - Bash(hotnews *)
   - Bash(npx hotnews *)

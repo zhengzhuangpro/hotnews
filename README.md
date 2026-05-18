@@ -5,79 +5,79 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![clawhub](https://img.shields.io/badge/clawhub-view-blue)](https://clawhub.ai/zhengzhuangpro/hotnews)
 
-English | [中文](README_zh.md)
+[English](README_en.md) | 中文
 
-A command-line trending news aggregator built with React Ink + TypeScript + Bun.
+一个基于 React Ink + TypeScript + Bun 构建的命令行热门新闻聚合工具。
 
-## Installation
+## 安装
 
 ```bash
 npm install -g hotnews
 ```
 
-After installation, run `hotnews` from anywhere — only Node.js is required.
+安装后即可在任意位置使用 `hotnews` 命令，只需 Node.js 环境。
 
-## Usage
+## 使用
 
-### Show help
+### 查看帮助
 
 ```bash
 hotnews --help
 ```
 
-### List all available sources
+### 查看所有可用源
 
 ```bash
 hotnews list
 ```
 
-### Fetch trending news
+### 获取热门新闻
 
 ```bash
-hotnews baidu      # Baidu Hot Search
-hotnews weibo      # Weibo Hot Search
-hotnews douyin     # Douyin Hot Search
-hotnews hupu       # Hupu Hot Topics
-hotnews zhihu      # Zhihu Hot Questions
-hotnews juejin     # Juejin Trending
-hotnews kr36       # 36Kr Hot
+hotnews baidu      # 百度热搜
+hotnews weibo      # 微博热搜
+hotnews douyin     # 抖音热搜
+hotnews hupu       # 虎扑热帖
+hotnews zhihu      # 知乎热榜
+hotnews juejin     # 掘金热榜
+hotnews kr36       # 36氪热榜
 hotnews github     # GitHub Trending
 ```
 
-### Limit the number of results
+### 控制显示条数
 
 ```bash
-hotnews baidu --limit 5       # Show top 5
-hotnews weibo -l 15            # Short flag
-hotnews douyin --limit 100     # Capped at 50 (max)
+hotnews baidu --limit 5       # 显示前 5 条
+hotnews weibo -l 15            # 短参数
+hotnews douyin --limit 100     # 超过最大值自动截断为 50 条
 ```
 
-### JSON output
+### JSON 格式输出
 
 ```bash
 hotnews baidu --json
 hotnews weibo --json --limit 5
 ```
 
-## News Sources
+## 新闻源
 
-| Source | ID | Description |
+| 源 | ID | 说明 |
 |---|---|---|
-| Baidu Hot Search | `baidu` | Baidu real-time trending topics |
-| Weibo Hot Search | `weibo` | Weibo real-time trending topics |
-| Douyin Hot Search | `douyin` | Douyin real-time trending topics |
-| Hupu Hot Topics | `hupu` | Hupu popular forum posts |
-| Zhihu Hot Questions | `zhihu` | Zhihu trending questions |
-| Juejin Trending | `juejin` | Juejin developer trending posts |
-| 36Kr Hot | `kr36` | 36Kr tech news trending |
-| GitHub Trending | `github` | GitHub trending repositories |
+| 百度热搜 | `baidu` | 百度实时热搜榜 |
+| 微博热搜 | `weibo` | 微博实时热搜榜 |
+| 抖音热搜 | `douyin` | 抖音实时热搜榜 |
+| 虎扑热搜 | `hupu` | 虎扑步行街热帖 |
+| 知乎热榜 | `zhihu` | 知乎热门问题 |
+| 掘金热榜 | `juejin` | 掘金开发者热门文章 |
+| 36氪热榜 | `kr36` | 36氪科技热门资讯 |
+| GitHub Trending | `github` | GitHub 热门仓库 |
 
-## Tech Stack
+## 技术栈
 
-- [Bun](https://bun.sh/) — Build tooling
-- [React Ink](https://github.com/vadimdemedes/ink) — Terminal UI rendering
-- [TypeScript](https://www.typescriptlang.org/) — Type safety
-- [meow](https://github.com/sindresorhus/meow) — CLI argument parsing
+- [Bun](https://bun.sh/) — 开发构建
+- [React Ink](https://github.com/vadimdemedes/ink) — 终端 UI 渲染
+- [TypeScript](https://www.typescriptlang.org/) — 类型安全
+- [meow](https://github.com/sindresorhus/meow) — CLI 参数解析
 
 ## License
 
