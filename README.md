@@ -17,6 +17,16 @@ npm install -g hotnews
 
 安装后即可在任意位置使用 `hotnews` 命令，只需 Node.js 环境。
 
+### Skill 安装
+
+作为 AI Agent skill 使用：
+
+```bash
+npx skills add https://github.com/zhengzhuangpro/hotnews --skill hotnews
+```
+
+安装后可通过 `/hotnews` 命令获取热门新闻。
+
 ## 使用
 
 ### 查看帮助

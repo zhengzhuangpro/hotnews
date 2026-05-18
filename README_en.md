@@ -17,6 +17,16 @@ npm install -g hotnews
 
 After installation, run `hotnews` from anywhere — only Node.js is required.
 
+### Skill Installation
+
+Use as an AI Agent skill:
+
+```bash
+npx skills add https://github.com/zhengzhuangpro/hotnews --skill hotnews
+```
+
+After installation, use `/hotnews` to fetch trending news.
+
 ## Usage
 
 ### Show help
