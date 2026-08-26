@@ -1,9 +1,10 @@
 {
   "name": "hotnews",
   "version": "0.1.6",
-  "description": "命令行热门新闻聚合工具，支持百度、微博、抖音、虎扑热搜",
+  "description": "热门新闻聚合工具，支持百度、微博、抖音、虎扑等 8 个平台；可用作 CLI 或 npm 库导入",
   "keywords": [
     "cli",
+    "library",
     "news",
     "hotnews",
     "baidu",
@@ -19,6 +20,19 @@
     "url": "https://github.com/zhengzhuangpro/hotnews.git"
   },
   "type": "module",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.js",
+      "require": "./dist/lib/index.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "bin": {
     "hotnews": "./dist/src/cli.js"
   },
