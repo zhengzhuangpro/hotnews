@@ -19,7 +19,7 @@ ${sourceList}
   Options
     --json     以 JSON 格式输出
     --limit    指定显示条数 (默认: 10, 最大: 50)
-    --help     显示帮助信息
+    --help, -h 显示帮助信息
 
   Examples
     $ hotnews list
@@ -32,6 +32,11 @@ ${sourceList}
     importMeta: import.meta,
     autoHelp: true,
     flags: {
+      help: {
+        type: "boolean",
+        shortFlag: "h",
+        default: false,
+      },
       json: {
         type: "boolean",
         default: false,
@@ -46,6 +51,10 @@ ${sourceList}
 );
 
 const command = cli.input[0];
+
+if (cli.flags.help) {
+  cli.showHelp(0);
+}
 
 runApp(command, cli.flags).catch((err) => {
   console.error(err);
