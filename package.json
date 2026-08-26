@@ -1,6 +1,6 @@
 {
   "name": "hotnews",
-  "version": "0.1.7-beta.1",
+  "version": "0.1.6",
   "description": "热门新闻聚合工具，支持百度、微博、抖音、虎扑等 8 个平台；可用作 CLI 或 npm 库导入",
   "keywords": [
     "cli",
