@@ -3,7 +3,7 @@ import type { NewsItem, NewsSource } from "../types.js";
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-async function fetchBaidu(): Promise<NewsItem[]> {
+export async function fetchBaidu(): Promise<NewsItem[]> {
   const res = await fetch(
     // "https://top.baidu.com/api/board?platform=wise&tab=realtime",
     "https://top.baidu.com/api/board?tab=realtime",
