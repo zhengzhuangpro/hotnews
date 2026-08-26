@@ -30,7 +30,7 @@ hotnews douyin -l 15      # Top 15 results
 | `hupu` | Hupu | Popular forum posts |
 | `zhihu` | Zhihu | Trending questions |
 | `juejin` | Juejin | Developer trending articles |
-| `kr36` | 36Kr | Tech news trending |
+| `36kr` | 36Kr | Realtime newsflashes |
 | `github` | GitHub | Trending repositories |
 
 ## Architecture

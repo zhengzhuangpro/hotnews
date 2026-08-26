@@ -50,7 +50,7 @@ hotnews douyin     # 抖音热搜
 hotnews hupu       # 虎扑热帖
 hotnews zhihu      # 知乎热榜
 hotnews juejin     # 掘金热榜
-hotnews kr36       # 36氪热榜
+hotnews 36kr       # 36氪快讯
 hotnews github     # GitHub Trending
 ```
 
@@ -114,7 +114,7 @@ for (const s of sources) {
 | 虎扑热搜 | `hupu` | 虎扑步行街热帖 |
 | 知乎热榜 | `zhihu` | 知乎热门问题 |
 | 掘金热榜 | `juejin` | 掘金开发者热门文章 |
-| 36氪热榜 | `kr36` | 36氪科技热门资讯 |
+| 36氪快讯 | `36kr` | 36氪实时快讯 |
 | GitHub Trending | `github` | GitHub 热门仓库 |
 
 ## 技术栈

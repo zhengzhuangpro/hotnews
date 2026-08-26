@@ -50,7 +50,7 @@ hotnews douyin     # Douyin Hot Search
 hotnews hupu       # Hupu Hot Topics
 hotnews zhihu      # Zhihu Hot Questions
 hotnews juejin     # Juejin Trending
-hotnews kr36       # 36Kr Hot
+hotnews 36kr       # 36Kr Flashes
 hotnews github     # GitHub Trending
 ```
 
@@ -114,7 +114,7 @@ Notes: network and parsing errors are re-thrown as-is (handle retries yourself);
 | Hupu Hot Topics | `hupu` | Hupu popular forum posts |
 | Zhihu Hot Questions | `zhihu` | Zhihu trending questions |
 | Juejin Trending | `juejin` | Juejin developer trending posts |
-| 36Kr Hot | `kr36` | 36Kr tech news trending |
+| 36Kr Flashes | `36kr` | 36Kr realtime newsflashes |
 | GitHub Trending | `github` | GitHub trending repositories |
 
 ## Tech Stack
