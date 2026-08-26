@@ -52,7 +52,6 @@
     "test": "bun test",
     "release": "bun scripts/release.ts patch",
     "beta": "bun scripts/release.ts prerelease --preid=beta",
-    "publish": "npm publish",
     "gh-release": "git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes"
   },
   "dependencies": {

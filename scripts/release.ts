@@ -51,6 +51,20 @@ async function run(cmd: string[], { dry = false, interactive = false } = {}): Pr
   return output.trim();
 }
 
+async function getPublishedVersions(pkgName: string): Promise<string[]> {
+  try {
+    const proc = Bun.spawn(["npm", "view", pkgName, "versions", "--json"], {
+      stdout: "pipe", stderr: "pipe",
+    });
+    const output = await new Response(proc.stdout).text();
+    const code = await proc.exited;
+    if (code !== 0) return [];
+    return JSON.parse(output.trim());
+  } catch {
+    return [];
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
@@ -86,47 +100,77 @@ async function main() {
   console.log("\nCheck sources...");
   await run(["bun", "scripts/check.ts"], { dry: dryRun });
 
-  // 3. Bump version
+  // 3. Bump version（从 npm registry 拿最新版本，避免与已发布版本冲突）
   const pkgPath = new URL("../package.json", import.meta.url).pathname;
   const pkg = await Bun.file(pkgPath).json();
-  const oldVersion = pkg.version;
-  const newVersion = bumpVersion(oldVersion, bumpType, preid);
-  console.log(`\nBump ${oldVersion} → ${newVersion}`);
+  const localVersion = pkg.version;
+
+  let baseVersion = localVersion;
+  if (!dryRun) {
+    const published = await getPublishedVersions(pkg.name);
+    if (published.length > 0) {
+      const latestPublished = published[published.length - 1];
+      // 取本地和 npm 上更高的那个作为基准
+      if (latestPublished.localeCompare(baseVersion, undefined, { numeric: true }) > 0) {
+        baseVersion = latestPublished;
+      }
+    }
+  }
+
+  const newVersion = bumpVersion(baseVersion, bumpType, preid);
+  console.log(`\nBump ${localVersion} → ${newVersion}${baseVersion !== localVersion ? ` (npm has ${baseVersion})` : ""}`);
+
+  // 检查目标版本是否已发布
+  if (!dryRun) {
+    const published = await getPublishedVersions(pkg.name);
+    if (published.includes(newVersion)) {
+      console.error(`Version ${newVersion} already exists on npm. Aborting.`);
+      process.exit(1);
+    }
+  }
 
   if (!dryRun) {
     pkg.version = newVersion;
     await Bun.write(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
   }
 
-  // 3. Build
+  // 4. Build
   console.log("\nBuild...");
   await run(["bun", "run", "build"], { dry: dryRun });
 
-  // 4. Git commit
+  // 5. Git commit + tag
   console.log("\nGit commit...");
   await run(["git", "add", "package.json"], { dry: dryRun });
   await run(["git", "commit", "-m", `release: v${newVersion}`], { dry: dryRun });
 
-  // 6. Git tag
   console.log("\nGit tag...");
   await run(["git", "tag", `v${newVersion}`], { dry: dryRun });
 
-  // 7. Publish（预发布版本发到同名 dist-tag，避免污染 latest）
+  // 6. Publish（--ignore-scripts 防止 lifecycle hook 重复触发 publish）
   console.log("\nPublish...");
   const publishCmd = newVersion.includes("-")
-    ? ["npm", "publish", "--tag", preid]
-    : ["npm", "publish"];
-  await run(publishCmd, { dry: dryRun, interactive: true });
+    ? ["npm", "publish", "--ignore-scripts", "--tag", preid]
+    : ["npm", "publish", "--ignore-scripts"];
+  try {
+    await run(publishCmd, { dry: dryRun, interactive: true });
+  } catch (err) {
+    // 发布失败：回滚 commit 和 tag
+    console.error("\nPublish failed, rolling back...");
+    await run(["git", "tag", "-d", `v${newVersion}`]).catch(() => {});
+    await run(["git", "reset", "--soft", "HEAD~1"]).catch(() => {});
+    await run(["git", "checkout", "--", "package.json"]).catch(() => {});
+    throw err;
+  }
 
-  // 8. Push
+  // 7. Push
   console.log("\nGit push...");
   await run(["git", "push", "--tags"], { dry: dryRun });
 
-  // 9. GitHub Release
+  // 8. GitHub Release
   console.log("\nGitHub Release...");
   await run(["gh", "release", "create", `v${newVersion}`, "--generate-notes"], { dry: dryRun });
 
-  // 10. Update release notes with highlights via claude
+  // 9. Update release notes with highlights via claude
   console.log("\nUpdate release notes with highlights...");
   await run([
     "claude",
