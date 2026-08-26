@@ -46,8 +46,9 @@
   "scripts": {
     "dev": "bun run --watch src/cli.tsx",
     "start": "bun run src/cli.tsx",
-    "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\" && bun build src/index.ts --outdir dist/lib --target node --format=esm && bun build src/index.ts --outfile dist/lib/index.cjs --target node --format=cjs && tsc -p tsconfig.build.json",
+    "build": "bun build src/cli.tsx --outdir dist/src --target node && node -e \"const f='dist/src/cli.js',c=require('fs').readFileSync(f,'utf8');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+c)\" && bun build src/index.ts --outdir dist/lib --target node --format=esm && bun build src/index.ts --outfile dist/lib/index.cjs --target node --format=cjs && tsc -p tsconfig.build.json && npm run smoke",
     "check": "bun scripts/check.ts",
+    "smoke": "node scripts/smoke.cjs",
     "test": "bun test",
     "release": "bun scripts/release.ts patch",
     "publish": "npm publish",
