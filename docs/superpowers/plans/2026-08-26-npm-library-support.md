@@ -178,14 +178,14 @@ Expected: FAIL，报模块不存在（`Cannot find module '../src/index.js'` 或
 ```typescript
 import type { NewsItem, NewsSource } from "./types.js";
 import { sources, getSource } from "./sources/index.js";
-import { baiduSource, fetchBaidu } from "./sources/baidu.js";
-import { weiboSource, fetchWeibo } from "./sources/weibo.js";
-import { douyinSource, fetchDouyin } from "./sources/douyin.js";
-import { hupuSource, fetchHupu } from "./sources/hupu.js";
-import { zhihuSource, fetchZhihu } from "./sources/zhihu.js";
-import { juejinSource, fetchJuejin } from "./sources/juejin.js";
-import { kr36Source, fetchKr36 } from "./sources/kr36.js";
-import { githubSource, fetchGithub } from "./sources/github.js";
+import { fetchBaidu } from "./sources/baidu.js";
+import { fetchWeibo } from "./sources/weibo.js";
+import { fetchDouyin } from "./sources/douyin.js";
+import { fetchHupu } from "./sources/hupu.js";
+import { fetchZhihu } from "./sources/zhihu.js";
+import { fetchJuejin } from "./sources/juejin.js";
+import { fetchKr36 } from "./sources/kr36.js";
+import { fetchGithub } from "./sources/github.js";
 
 export type { NewsItem, NewsSource };
 export { sources, getSource };
@@ -209,21 +209,9 @@ export async function fetchNews(
   const items = await source.fetch();
   return options.limit ? items.slice(0, options.limit) : items;
 }
-
-// 保留源对象的具名导出（与 fetchXxx 函数互补）
-export {
-  baiduSource,
-  weiboSource,
-  douyinSource,
-  hupuSource,
-  zhihuSource,
-  juejinSource,
-  kr36Source,
-  githubSource,
-};
 ```
 
-注意：`xxxSource` 对象也 re-export（现有 `src/sources/index.ts` 内部在用，外部用户可能也想要元信息对象）。若 `bunx tsc --noEmit` 报未使用导入的告警（strict 不含 noUnusedLocals，默认不会），保持现状即可。
+注意：**不要** re-export 各 `xxxSource` 对象——规格的导出清单只有 fetch 函数、`fetchNews`、`sources`、`getSource` 和类型（元信息统一走 `sources`/`getSource`）。
 
 - [ ] **Step 4: `package.json` 加 test script**
 
@@ -442,14 +430,6 @@ const EXPECTED_EXPORTS = [
   "fetchNews",
   "getSource",
   "sources",
-  "baiduSource",
-  "weiboSource",
-  "douyinSource",
-  "hupuSource",
-  "zhihuSource",
-  "juejinSource",
-  "kr36Source",
-  "githubSource",
 ];
 
 async function main() {
