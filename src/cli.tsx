@@ -20,6 +20,7 @@ ${sourceList}
     --json     以 JSON 格式输出
     --limit    指定显示条数 (默认: 10, 最大: 50)
     --help, -h 显示帮助信息
+    --version, -v 显示版本号
 
   Examples
     $ hotnews list
@@ -35,6 +36,11 @@ ${sourceList}
       help: {
         type: "boolean",
         shortFlag: "h",
+        default: false,
+      },
+      version: {
+        type: "boolean",
+        shortFlag: "v",
         default: false,
       },
       json: {
@@ -54,6 +60,10 @@ const command = cli.input[0];
 
 if (cli.flags.help) {
   cli.showHelp(0);
+}
+
+if (cli.flags.version) {
+  cli.showVersion();
 }
 
 runApp(command, cli.flags).catch((err) => {
