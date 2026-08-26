@@ -50,6 +50,12 @@ describe("fetchNews", () => {
     expect(items.length).toBe(2);
   });
 
+  test("limit 0 returns empty array", async () => {
+    global.fetch = mockFetch(baiduJson);
+    const items = await fetchNews("baidu", { limit: 0 });
+    expect(items.length).toBe(0);
+  });
+
   test("propagates fetch errors", async () => {
     global.fetch = async () => {
       throw new Error("network down");

@@ -29,5 +29,5 @@ export async function fetchNews(
     );
   }
   const items = await source.fetch();
-  return options.limit ? items.slice(0, options.limit) : items;
+  return options.limit !== undefined ? items.slice(0, options.limit) : items;
 }
