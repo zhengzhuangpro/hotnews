@@ -69,6 +69,41 @@ hotnews baidu --json
 hotnews weibo --json --limit 5
 ```
 
+## 作为库使用
+
+`hotnews` 也可以作为 npm 库在其他项目中导入（要求 Node.js >= 18）：
+
+```bash
+npm install hotnews
+```
+
+```typescript
+import { fetchBaidu, fetchNews, sources } from "hotnews";
+
+// 直接获取某个源的热榜
+const items = await fetchBaidu();
+
+// 动态指定源 + 条数
+const weibo = await fetchNews("weibo", { limit: 5 });
+
+// 遍历所有源的元信息
+for (const s of sources) {
+  console.log(s.id, s.name, s.description);
+}
+```
+
+### API
+
+| 导出 | 说明 |
+|---|---|
+| `fetchNews(id, options?)` | 便捷函数：按源 id 获取，`options.limit` 截断条数 |
+| `fetchBaidu()` 等 8 个函数 | 各源具名函数，返回 `Promise<NewsItem[]>` |
+| `sources` | 全部源的元信息数组 |
+| `getSource(id)` | 按 id 查找源 |
+| `NewsItem` / `NewsSource` / `FetchNewsOptions` | 类型定义 |
+
+说明：网络失败、解析失败会原样抛出，调用方自行处理重试；传入未知源 id 会抛出包含全部可用 id 的 `Error`。同时支持 ESM 与 CJS（`require("hotnews")`）。
+
 ## 新闻源
 
 | 源 | ID | 说明 |

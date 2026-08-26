@@ -69,6 +69,41 @@ hotnews baidu --json
 hotnews weibo --json --limit 5
 ```
 
+## Library Usage
+
+`hotnews` can also be imported as an npm library in other projects (requires Node.js >= 18):
+
+```bash
+npm install hotnews
+```
+
+```typescript
+import { fetchBaidu, fetchNews, sources } from "hotnews";
+
+// Fetch a specific source directly
+const items = await fetchBaidu();
+
+// Dynamic source + limit
+const weibo = await fetchNews("weibo", { limit: 5 });
+
+// Iterate source metadata
+for (const s of sources) {
+  console.log(s.id, s.name, s.description);
+}
+```
+
+### API
+
+| Export | Description |
+|---|---|
+| `fetchNews(id, options?)` | Convenience function: fetch by source id, `options.limit` truncates |
+| `fetchBaidu()` and 7 more | Named per-source functions returning `Promise<NewsItem[]>` |
+| `sources` | Metadata array of all sources |
+| `getSource(id)` | Look up a source by id |
+| `NewsItem` / `NewsSource` / `FetchNewsOptions` | Type definitions |
+
+Notes: network and parsing errors are re-thrown as-is (handle retries yourself); an unknown source id throws an `Error` listing all valid ids. Both ESM and CJS (`require("hotnews")`) are supported.
+
 ## News Sources
 
 | Source | ID | Description |
