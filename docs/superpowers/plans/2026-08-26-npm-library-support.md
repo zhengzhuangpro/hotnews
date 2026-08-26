@@ -403,14 +403,16 @@ git commit -m "feat: expose npm package exports for library usage"
 ### Task 5: 构建冒烟检查脚本
 
 **Files:**
-- Create: `scripts/smoke.js`
+- Create: `scripts/smoke.cjs`
 - Modify: `package.json`（scripts 加 `"smoke"`，并挂到 `build` 末尾）
 
 **Interfaces:**
 - Consumes: Task 3 的 `dist/lib/index.js`、`dist/lib/index.cjs`；Task 2 定义的导出清单
 - Produces: `npm run smoke` 命令（Node 运行，验证双格式导出齐全，不发网络请求）；`build` 完成时自动执行
 
-- [ ] **Step 1: 创建 `scripts/smoke.js`**
+> 注意：脚本必须用 `.cjs` 扩展名——包根 `"type": "module"` 会让 Node 把 `.js` 当 ESM 解析，顶层 `require`/`__dirname` 会报错。
+
+- [ ] **Step 1: 创建 `scripts/smoke.cjs`**
 
 ```javascript
 #!/usr/bin/env node
@@ -459,7 +461,7 @@ main().catch((err) => {
 `package.json` scripts 中加：
 
 ```json
-    "smoke": "node scripts/smoke.js",
+    "smoke": "node scripts/smoke.cjs",
 ```
 
 并把 `build` 末尾追加 ` && npm run smoke`，即 build 最终形态：
