@@ -2,7 +2,7 @@
 
 ## Project
 
-`hotnews` — CLI trending news aggregator fetching hot topics from 8 sources across Chinese platforms and GitHub. Built with React Ink + TypeScript + Bun.
+`hotnews` — CLI trending news aggregator fetching hot topics from 8 sources across Chinese platforms and GitHub. Also importable as an npm library (ESM + CJS). Built with React Ink + TypeScript + Bun.
 
 ## Quick Reference
 
@@ -19,6 +19,15 @@ hotnews douyin -l 15      # Top 15 results
 |---|---|---|
 | `--json` | | Output as JSON instead of terminal UI |
 | `--limit N` | `-l N` | Number of items (1-50, default 10) |
+| `--help` | `-h` | Show help |
+| `--version` | `-v` | Show version |
+
+### Library Usage
+
+```typescript
+import { fetchBaidu, fetchNews, sources } from "hotnews";
+const weibo = await fetchNews("weibo", { limit: 5 });
+```
 
 ## Sources
 
@@ -39,6 +48,7 @@ hotnews douyin -l 15      # Top 15 results
 src/
 ├── cli.tsx           # CLI entry point (meow-based arg parsing)
 ├── app.tsx           # React Ink terminal UI components
+├── index.ts          # Library entry: fetchNews + re-exports (ESM/CJS dual build)
 ├── types.ts          # Type definitions (NewsItem, NewsSource)
 └── sources/
     ├── index.ts      # Exports all sources and getSource() lookup
@@ -50,6 +60,13 @@ src/
     ├── juejin.ts     # Juejin fetcher
     ├── kr36.ts       # 36Kr fetcher
     └── github.ts     # GitHub trending fetcher (HTML scraping)
+scripts/
+├── build.ts          # Build chain: clean → CLI → lib ESM/CJS → .d.ts → smoke
+├── check.ts          # Source health check (real network calls)
+├── release.ts        # Release flow (patch/minor/major/prerelease)
+└── smoke.cjs         # Post-build export verification (ESM + CJS)
+tests/                # bun test suites (fetch-news, bump-version)
+tsconfig.build.json   # Declaration emit for dist/lib
 ```
 
 ### Key Types
@@ -76,16 +93,22 @@ interface NewsSource {
 bun install               # Install deps
 bun run dev               # Watch mode
 bun run start             # Run once
-bun run build             # Build to dist/src/cli.js
-bun run check             # Validate sources
-bun run release           # Bump, build, tag, publish
+bun run build             # Build CLI (dist/src) + library (dist/lib ESM/CJS/.d.ts), run smoke
+bun run check             # Validate sources (real network calls)
+bun run test              # Unit tests (bun test)
+bun run smoke             # Verify built artifacts export correctly
+bun run beta              # Publish prerelease (e.g. 0.1.7-beta.0) to beta dist-tag
+bun run release           # Bump patch, build, tag, publish
 ```
 
 ## Adding a Source
 
-1. Create `src/sources/<name>.ts` with a `NewsSource` export
-2. Add it to `src/sources/index.ts`
-3. Run `bun run check`
+1. Create `src/sources/<name>.ts` with an exported `fetchXxx()` and source object
+2. Add the source object to `src/sources/index.ts`
+3. Export `fetchXxx` from `src/index.ts` (library API)
+4. Add `fetchXxx` to `EXPECTED_EXPORTS` in `scripts/smoke.cjs`
+5. Add a row to the source tables in `README.md` / `README_en.md`
+6. Run `bun run check && bun run test && bun run build`
 
 ## Code Style
 

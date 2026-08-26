@@ -32,7 +32,13 @@ After installation, use `/hotnews` to fetch trending news.
 ### Show help
 
 ```bash
-hotnews --help
+hotnews --help   # or shorthand: hotnews -h
+```
+
+### Show version
+
+```bash
+hotnews --version   # or shorthand: hotnews -v
 ```
 
 ### List all available sources

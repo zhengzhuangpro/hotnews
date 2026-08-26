@@ -32,7 +32,13 @@ npx skills add https://github.com/zhengzhuangpro/hotnews --skill hotnews
 ### 查看帮助
 
 ```bash
-hotnews --help
+hotnews --help   # 或简写 hotnews -h
+```
+
+### 查看版本
+
+```bash
+hotnews --version   # 或简写 hotnews -v
 ```
 
 ### 查看所有可用源
