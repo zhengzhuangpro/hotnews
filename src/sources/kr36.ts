@@ -18,7 +18,7 @@ export async function fetchKr36(): Promise<NewsItem[]> {
 
   return items.map((item: any, i: number) => ({
     title: item.templateMaterial?.widgetTitle as string,
-    url: `https://36kr.com/p/${item.itemId}`,
+    url: `https://36kr.com/newsflashes/${item.itemId}`,
     rank: i + 1,
   }));
 }
