@@ -9,6 +9,7 @@ import { juejinSource } from "./juejin.js";
 import { githubSource } from "./github.js";
 import { sspaiSource } from "./sspai.js";
 import { v2exSource } from "./v2ex.js";
+import { wallstcnSource } from "./wallstcn.js";
 
 export const sources: NewsSource[] = [
   baiduSource,
@@ -21,6 +22,7 @@ export const sources: NewsSource[] = [
   githubSource,
   sspaiSource,
   v2exSource,
+  wallstcnSource,
 ];
 
 export function getSource(id: string): NewsSource | undefined {

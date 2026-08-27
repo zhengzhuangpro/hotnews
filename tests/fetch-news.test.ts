@@ -65,8 +65,8 @@ describe("fetchNews", () => {
 });
 
 describe("library metadata", () => {
-  test("exposes 10 sources with getSource lookup", () => {
-    expect(sources.length).toBe(10);
+  test("exposes 11 sources with getSource lookup", () => {
+    expect(sources.length).toBe(11);
     expect(getSource("weibo")?.id).toBe("weibo");
     expect(getSource("does-not-exist")).toBeUndefined();
   });
