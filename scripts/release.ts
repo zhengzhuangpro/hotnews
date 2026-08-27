@@ -68,12 +68,13 @@ async function getPublishedVersions(pkgName: string): Promise<string[]> {
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
+  const skipCheck = args.includes("--skip-check");
   const bumpType = args.find((a) => BUMP_TYPES.includes(a as BumpType)) as BumpType | undefined;
   const preidArg = args.find((a) => a.startsWith("--preid="));
   const preid = preidArg ? preidArg.split("=")[1] : "beta";
 
   if (!bumpType) {
-    console.error(`Usage: bun scripts/release.ts <patch|minor|major|prerelease> [--preid=beta] [--dry-run]`);
+    console.error(`Usage: bun scripts/release.ts <patch|minor|major|prerelease> [--preid=beta] [--dry-run] [--skip-check]`);
     process.exit(1);
   }
 
@@ -98,7 +99,11 @@ async function main() {
 
   // 2. Check sources
   console.log("\nCheck sources...");
-  await run(["bun", "scripts/check.ts"], { dry: dryRun });
+  if (skipCheck) {
+    console.log("  (skipped via --skip-check)");
+  } else {
+    await run(["bun", "scripts/check.ts"], { dry: dryRun });
+  }
 
   // 3. Bump version（从 npm registry 拿最新版本，避免与已发布版本冲突）
   const pkgPath = new URL("../package.json", import.meta.url).pathname;
