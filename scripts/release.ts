@@ -163,7 +163,8 @@ async function main() {
     console.error("\nPublish failed, rolling back...");
     await run(["git", "tag", "-d", `v${newVersion}`]).catch(() => {});
     await run(["git", "reset", "--soft", "HEAD~1"]).catch(() => {});
-    await run(["git", "checkout", "--", "package.json"]).catch(() => {});
+    // 从 HEAD 恢复 index 和工作区（reset --soft 后 index 仍是 bump 后的版本）
+    await run(["git", "checkout", "HEAD", "--", "package.json"]).catch(() => {});
     throw err;
   }
 
