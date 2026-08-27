@@ -12,6 +12,7 @@ const EXPECTED_EXPORTS = [
   "fetchJuejin",
   "fetchKr36",
   "fetchGithub",
+  "fetchSspai",
   "fetchNews",
   "getSource",
   "sources",
@@ -27,7 +28,7 @@ async function main() {
     assert.ok(name in esm, `ESM 产物缺少导出: ${name}`);
     assert.ok(name in cjs, `CJS 产物缺少导出: ${name}`);
   }
-  assert.strictEqual(esm.sources.length, 8, "应有 8 个新闻源");
+  assert.strictEqual(esm.sources.length, 9, "应有 9 个新闻源");
   assert.strictEqual(typeof esm.fetchNews, "function");
 
   console.log("smoke: ESM + CJS exports OK");

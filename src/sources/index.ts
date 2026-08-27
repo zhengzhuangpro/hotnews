@@ -7,6 +7,7 @@ import { kr36Source } from "./kr36.js";
 import { zhihuSource } from "./zhihu.js";
 import { juejinSource } from "./juejin.js";
 import { githubSource } from "./github.js";
+import { sspaiSource } from "./sspai.js";
 
 export const sources: NewsSource[] = [
   baiduSource,
@@ -17,6 +18,7 @@ export const sources: NewsSource[] = [
   zhihuSource,
   juejinSource,
   githubSource,
+  sspaiSource,
 ];
 
 export function getSource(id: string): NewsSource | undefined {
