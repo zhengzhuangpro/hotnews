@@ -59,6 +59,7 @@ hotnews juejin     # 掘金热榜
 hotnews 36kr       # 36氪快讯
 hotnews github     # GitHub Trending
 hotnews sspai      # 少数派热榜
+hotnews v2ex       # V2EX 分享发现
 ```
 
 ### 控制显示条数
@@ -104,7 +105,7 @@ for (const s of sources) {
 | 导出 | 说明 |
 |---|---|
 | `fetchNews(id, options?)` | 便捷函数：按源 id 获取，`options.limit` 截断条数 |
-| `fetchBaidu()` 等 9 个函数 | 各源具名函数，返回 `Promise<NewsItem[]>` |
+| `fetchBaidu()` 等 10 个函数 | 各源具名函数，返回 `Promise<NewsItem[]>` |
 | `sources` | 全部源的元信息数组 |
 | `getSource(id)` | 按 id 查找源 |
 | `NewsItem` / `NewsSource` / `FetchNewsOptions` | 类型定义 |
@@ -124,6 +125,7 @@ for (const s of sources) {
 | 36氪快讯 | `36kr` | 36氪实时快讯 |
 | GitHub Trending | `github` | GitHub 热门仓库 |
 | 少数派热榜 | `sspai` | 少数派热门文章 |
+| V2EX 分享发现 | `v2ex` | V2EX 分享发现节点热帖 |
 
 ## 技术栈
 

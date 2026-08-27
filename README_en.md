@@ -59,6 +59,7 @@ hotnews juejin     # Juejin Trending
 hotnews 36kr       # 36Kr Flashes
 hotnews github     # GitHub Trending
 hotnews sspai      # SSPai Trending
+hotnews v2ex       # V2EX Share Discoveries
 ```
 
 ### Limit the number of results
@@ -104,7 +105,7 @@ for (const s of sources) {
 | Export | Description |
 |---|---|
 | `fetchNews(id, options?)` | Convenience function: fetch by source id, `options.limit` truncates |
-| `fetchBaidu()` and 8 more | Named per-source functions returning `Promise<NewsItem[]>` |
+| `fetchBaidu()` and 9 more | Named per-source functions returning `Promise<NewsItem[]>` |
 | `sources` | Metadata array of all sources |
 | `getSource(id)` | Look up a source by id |
 | `NewsItem` / `NewsSource` / `FetchNewsOptions` | Type definitions |
@@ -124,6 +125,7 @@ Notes: network and parsing errors are re-thrown as-is (handle retries yourself);
 | 36Kr Flashes | `36kr` | 36Kr realtime newsflashes |
 | GitHub Trending | `github` | GitHub trending repositories |
 | SSPai Trending | `sspai` | SSPai popular articles |
+| V2EX Share Discoveries | `v2ex` | V2EX share node hot topics |
 
 ## Tech Stack
 

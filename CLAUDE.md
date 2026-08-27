@@ -2,7 +2,7 @@
 
 ## Project
 
-`hotnews` — CLI trending news aggregator fetching hot topics from 9 sources across Chinese platforms and GitHub. Also importable as an npm library (ESM + CJS). Built with React Ink + TypeScript + Bun.
+`hotnews` — CLI trending news aggregator fetching hot topics from 10 sources across Chinese platforms and GitHub. Also importable as an npm library (ESM + CJS). Built with React Ink + TypeScript + Bun.
 
 ## Quick Reference
 
@@ -42,6 +42,7 @@ const weibo = await fetchNews("weibo", { limit: 5 });
 | `36kr` | 36Kr | Realtime newsflashes |
 | `github` | GitHub | Trending repositories |
 | `sspai` | SSPai (少数派) | Hot articles |
+| `v2ex` | V2EX | Share discoveries node topics |
 
 ## Architecture
 
@@ -61,7 +62,8 @@ src/
     ├── juejin.ts     # Juejin fetcher
     ├── kr36.ts       # 36Kr fetcher
     ├── github.ts     # GitHub trending fetcher (HTML scraping)
-    └── sspai.ts      # SSPai hot articles fetcher
+    ├── sspai.ts      # SSPai hot articles fetcher
+    └── v2ex.ts       # V2EX share node fetcher (JSON Feed)
 scripts/
 ├── build.ts          # Build chain: clean → CLI → lib ESM/CJS → .d.ts → smoke
 ├── check.ts          # Source health check (real network calls)

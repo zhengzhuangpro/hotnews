@@ -9,10 +9,11 @@ import { fetchJuejin } from "./sources/juejin.js";
 import { fetchKr36 } from "./sources/kr36.js";
 import { fetchGithub } from "./sources/github.js";
 import { fetchSspai } from "./sources/sspai.js";
+import { fetchV2ex } from "./sources/v2ex.js";
 
 export type { NewsItem, NewsSource };
 export { sources, getSource };
-export { fetchBaidu, fetchWeibo, fetchDouyin, fetchHupu, fetchZhihu, fetchJuejin, fetchKr36, fetchGithub, fetchSspai };
+export { fetchBaidu, fetchWeibo, fetchDouyin, fetchHupu, fetchZhihu, fetchJuejin, fetchKr36, fetchGithub, fetchSspai, fetchV2ex };
 
 export interface FetchNewsOptions {
   /** 不传返回全部；传了截断为前 limit 条 */
