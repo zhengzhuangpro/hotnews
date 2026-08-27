@@ -9,6 +9,13 @@ export async function fetchV2ex(): Promise<NewsItem[]> {
       "User-Agent": UA,
       Referer: "https://www.v2ex.com/",
     },
+    // v2ex 在部分网络（DNS 污染）下连接会无限挂起，10s 超时快速失败
+    signal: AbortSignal.timeout(10_000),
+  }).catch((err: unknown) => {
+    if (err instanceof Error && (err.name === "TimeoutError" || err.name === "AbortError")) {
+      throw new Error("V2EX 请求超时（10s），当前网络可能无法访问 v2ex.com");
+    }
+    throw err;
   });
   const json = (await res.json()) as any;
 
